@@ -1,27 +1,32 @@
-'''
-Created on Nov 13, 2022
-
-@author: truax
-'''
-
-# https://niaid.github.io/3dpx_api/use_api/
+"""
+Name: Isaac Hedges, Ben Truax 
+email: hedgesic@mail.uc.edu, truaxbp@mail.uc.edu
+Assignment: Assignment11
+Course: IS 4010
+Semester/Year: Fall 2022
+Brief Description: Writing using an API to find unique information
+Citations:
+Anything else that's relevant: 
+"""
 
 import json  #built in, no pip required (if needed, uses "jsons" import)
 import requests
 
-# API KEY = YgtWsNG7O2L9uLaqttPRLgi8J1zgC5l9FkMQdQIB
+# API URL = https://api.wheretheiss.at/v1/satellites/25544
+# API KEY = Open Source
+# This API gives information about the current status of the International Space Station
 
-response = requests.get('http://api.data.gov/nih/3dprint/model/1.0/model_single.json?model_id=000914&api_key=4WHycwdOuvs2FA5TrfmDHGuMid6x5b5ZnRYsqVLG')
+# URL with data request and submit to the server
+response = requests.get('https://api.wheretheiss.at/v1/satellites/25544')
 json_string = response.content
 
+# Parse the results
 parsed_json = json.loads(json_string) # Now we have a python dictionary
-    
-# total = int(parsed_json['total'])        # The number of parks that were returned
-    
-# for park in parsed_json['data']: 
-    # get the value associated with parsed_json['data'] 
-#    print (park)
 
-#lets see if this works
+# Check on parsed results
 print(parsed_json)
-#print(parsed_json['data'][0])
+
+# Extracting Interesting Data about current location of ISS
+print("Name:", parsed_json['name'])    
+print("Latitude:", parsed_json['latitude'])
+print("longitude:", parsed_json['longitude'])
